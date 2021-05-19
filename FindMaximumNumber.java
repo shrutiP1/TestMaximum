@@ -28,6 +28,19 @@ public class FindMaximumNumber
 		return max;
 		
 	}
+	private static String checkStringMaximum(String[] x)
+	{
+		String max=x[0];
+		for(String e:x)
+		{
+			if(e.compareTo(max)>0)
+			{
+				max=e;
+			}
+		}
+		return max;
+	}
+
 	@Test
 	public void givenIntegerMaximumAtFirst_WhenProper_returnMaximumNumberAtFirstPosition()
 	{
@@ -70,6 +83,28 @@ public class FindMaximumNumber
 		 Double max=checkDoubleMaximum(arr);
 		 Assert.assertEquals(arr[2], max);
 	} 
+	@Test
+	public void givenStringrMaximumAtFirst_WhenProper_returnMaximumNumberAtFirstPosition()
+	{
+		 String arr[]= {"peach","abc","def"};
+		 String max=checkStringMaximum(arr);
+		Assert.assertEquals(arr[0], max);
+	}
+	@Test
+	public void givenStringrMaximumAtSecond_WhenProper_returnMaximumNumberAtFirstPosition()
+	{
+		 String arr[]= {"Peach","zbc","def"};
+		 String max=checkStringMaximum(arr);
+		Assert.assertEquals(arr[1], max);
+	}
+	@Test
+	public void givenStringrMaximumAtThird_WhenProper_returnMaximumNumberAtFirstPosition()
+	{
+		 String arr[]= {"Peach","dbc","zef"};
+		 String max=checkStringMaximum(arr);
+		Assert.assertEquals(arr[2], max);
+	}
+    
 	public static void main(String[] args)
 	{
 		System.out.println("Welcome");
@@ -79,6 +114,8 @@ public class FindMaximumNumber
 	    Double arr1[]= {1.2,2.9,3.4};
 	    System.out.println("Maximum number in double array is "+checkDoubleMaximum(arr1));
 	    
+	    String arr2[]= {"Apple","Peach","Banana"};
+	    System.out.println("Maximum in String array is "+checkStringMaximum(arr2));
 		
 	}	
 
