@@ -13,7 +13,6 @@ public class FindMaximumNumber<Z extends Comparable<Z>>
 		num1=x;
 		num2=y;
 		num3=z;
-		
 	}
 	
 	public static <E extends Comparable<E>>E checkMaximum(E x,E y,E z)
@@ -39,10 +38,14 @@ public class FindMaximumNumber<Z extends Comparable<Z>>
 		
 	}
 	//UC4
-	public static <E extends Comparable<E>>E checkMaximum(E x[])
+	public static <E extends Comparable<E>>void checkMaximum(E[] x)
 	{
 		E max=Collections.max(Arrays.asList(x));
-		return max;
+		printMaximum(max);
+	}
+	public static <E> void printMaximum(E max)
+	{
+		System.out.println("The Maximum Element is : "+max );
 	}
 	public Z testMaximum()
 	{
@@ -131,16 +134,8 @@ public class FindMaximumNumber<Z extends Comparable<Z>>
 	public static void main(String[] args)
 	{
 		System.out.println("Welcome");
-	    checkMaximum(1,2,3);
-	    checkMaximum(1.2,2.9,3.4);
-	    checkMaximum("Apple","Peach","Banana");
-	    new FindMaximumNumber<Integer>(2, 3, 1).testMaximum();
-	    new FindMaximumNumber<Double>(2.1, 3.2, 1.6).testMaximum();
-	    new FindMaximumNumber<String>("shruti","Patil","dadu").testMaximum();
-	    FindMaximumNumber<Integer> n=new FindMaximumNumber<Integer>(null, null, null);
-	    n.givenGenricIntegerType_WhenProper_returnMaximum();
-	    n.givenGenricDoubleType_WhenProper_returnMaximum();
-	    n.givenGenricStringType_WhenProper_returnMaximum();
+	    Integer arr[]= {1,2,3,4};
+	    checkMaximum(arr);
 	   
 	}	
 
