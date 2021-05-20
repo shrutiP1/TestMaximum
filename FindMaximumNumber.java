@@ -1,122 +1,147 @@
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-public class FindMaximumNumber
+public class FindMaximumNumber<Z extends Comparable<Z>>
 {
-	public static Integer checkIntMaximum(Integer[] x)
+	Z num1,num2,num3;
+	
+	FindMaximumNumber( Z x ,Z y,Z z)
 	{
-		Integer max=x[0];
-		for(Integer e:x)
-		{
-			if(e.compareTo(max)>0)
-			{
-				max=e;
-			}
-		}
-		return max;
-	}
-	public static Double checkDoubleMaximum(Double[] x)
-	{
-		Double max=x[0];
-		for(Double e:x)
-		{
-			if(e.compareTo(max)>0)
-			{
-				max=e;
-			}
-		}
-		return max;
+		num1=x;
+		num2=y;
+		num3=z;
 		
 	}
-	private static String checkStringMaximum(String[] x)
+	
+	public static <E extends Comparable<E>>E checkMaximum(E x,E y,E z)
 	{
-		String max=x[0];
-		for(String e:x)
+		E max;
+		if(x.compareTo(y)> 0 && x.compareTo(z)>0)
 		{
-			if(e.compareTo(max)>0)
-			{
-				max=e;
-			}
+			System.out.println(x+" iS Maximum");
+			max=x;
+		}
+		else if(y.compareTo(x) >0 && y.compareTo(z)>0)
+		{
+			System.out.println(y+" is Maximum");
+			max=y;
+		}
+		else
+		{
+			System.out.println(z+" is Maximum");
+			max=z;
 		}
 		return max;
+			
+		
 	}
-
-	@Test
+	//UC4
+	public static <E extends Comparable<E>>E checkMaximum(E x[])
+	{
+		E max=Collections.max(Arrays.asList(x));
+		return max;
+	}
+	public Z testMaximum()
+	{
+		
+		Z max=checkMaximum(num1,num2,num3);
+		return max;
+	}
+    @Test
 	public void givenIntegerMaximumAtFirst_WhenProper_returnMaximumNumberAtFirstPosition()
 	{
 		 Integer arr[]= {7,2,3};
-		 Integer max=checkIntMaximum(arr);
+		 Integer max=checkMaximum(7,2,3);
 		Assert.assertEquals(arr[0], max);
 	}
 	@Test
 	public void givenIntegerMaximumAtSecond_WhenProper_returnMaximumNumberAtSecondPosition()
 	{
 		 Integer arr[]= {2,6,3};
-		 Integer max=checkIntMaximum(arr);
+		 Integer max=checkMaximum(2,6,3);
 		Assert.assertEquals(arr[1], max);
 	} 
 	@Test
 	public void givenIntegerMaximumAtThird_WhenProper_returnMaximumNumberAtThirdPosition()
 	{
 		 Integer arr[]= {2,6,9};
-		 Integer max=checkIntMaximum(arr);
+		 Integer max=checkMaximum(2,6,9);
 		Assert.assertEquals(arr[2], max);
 	} 
 	@Test
 	public void givenDoublerMaximumAtFirst_WhenProper_returnMaximumNumberAtFirstPosition()
 	{
 		 Double arr[]= {7.1,2.2,3.1};
-		 Double max=checkDoubleMaximum(arr);
+		 Double max=checkMaximum(7.1,2.2,3.1);
 		Assert.assertEquals(arr[0], max);
 	}
 	@Test
 	public void givenDoublerMaximumAtSecond_WhenProper_returnMaximumNumberAtFirstPosition()
 	{
-		 Double arr[]= {7.1,9.2,3.1};
-		 Double max=checkDoubleMaximum(arr);
-		Assert.assertEquals(arr[1], max);
+		 Double max=checkMaximum(7.1,9.2,3.1);
+		Assert.assertEquals("9.2", max);
 	}
 	@Test
 	public  void givenDoubleMaximumAtThird_WhenProper_returnMaximumNumberAtThirdPosition()
 	{
-		 Double arr[]= {7.1,9.2,10.1};
-		 Double max=checkDoubleMaximum(arr);
-		 Assert.assertEquals(arr[2], max);
+         Double max=checkMaximum(7.1,9.2,10.1);
+		 Assert.assertEquals("10.1", max);
 	} 
 	@Test
 	public void givenStringrMaximumAtFirst_WhenProper_returnMaximumNumberAtFirstPosition()
 	{
-		 String arr[]= {"peach","abc","def"};
-		 String max=checkStringMaximum(arr);
-		Assert.assertEquals(arr[0], max);
+	    String max=checkMaximum("peach","abc","def");
+		Assert.assertEquals("peach", max);
 	}
 	@Test
 	public void givenStringrMaximumAtSecond_WhenProper_returnMaximumNumberAtFirstPosition()
 	{
-		 String arr[]= {"Peach","zbc","def"};
-		 String max=checkStringMaximum(arr);
-		Assert.assertEquals(arr[1], max);
+		 String max=checkMaximum("Peach","zbc","def");
+		Assert.assertEquals("zbc", max);
 	}
 	@Test
 	public void givenStringrMaximumAtThird_WhenProper_returnMaximumNumberAtFirstPosition()
 	{
-		 String arr[]= {"Peach","dbc","zef"};
-		 String max=checkStringMaximum(arr);
-		Assert.assertEquals(arr[2], max);
+		String max=checkMaximum("Peach","dbc","zef");
+		Assert.assertEquals("zef", max);
 	}
-    
+    @Test
+    public void givenGenricIntegerType_WhenProper_returnMaximum()
+    {
+       	Integer value=checkMaximum(3, 2, 1);
+    	Assert.assertSame(3, value);
+    }
+    double epsilon=0.00001d;
+    @Test
+    public void givenGenricDoubleType_WhenProper_returnMaximum()
+    {
+       	Double value=checkMaximum(3.22,2.87,1.33);
+       	System.out.println(value);
+    	Assert.assertEquals(3.22, value,epsilon);
+    }
+    @Test
+    public void givenGenricStringType_WhenProper_returnMaximum()
+    {
+       	String value=checkMaximum("za","raju", "patil");
+    	Assert.assertSame("za", value);
+    }
 	public static void main(String[] args)
 	{
 		System.out.println("Welcome");
-		Integer arr[]= {7,2,3};
-	    System.out.println("Maximum number in integer array is "+checkIntMaximum(arr));
-	    
-	    Double arr1[]= {1.2,2.9,3.4};
-	    System.out.println("Maximum number in double array is "+checkDoubleMaximum(arr1));
-	    
-	    String arr2[]= {"Apple","Peach","Banana"};
-	    System.out.println("Maximum in String array is "+checkStringMaximum(arr2));
-		
+	    checkMaximum(1,2,3);
+	    checkMaximum(1.2,2.9,3.4);
+	    checkMaximum("Apple","Peach","Banana");
+	    new FindMaximumNumber<Integer>(2, 3, 1).testMaximum();
+	    new FindMaximumNumber<Double>(2.1, 3.2, 1.6).testMaximum();
+	    new FindMaximumNumber<String>("shruti","Patil","dadu").testMaximum();
+	    FindMaximumNumber<Integer> n=new FindMaximumNumber<Integer>(null, null, null);
+	    n.givenGenricIntegerType_WhenProper_returnMaximum();
+	    n.givenGenricDoubleType_WhenProper_returnMaximum();
+	    n.givenGenricStringType_WhenProper_returnMaximum();
+	   
 	}	
 
 }
